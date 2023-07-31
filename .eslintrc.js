@@ -14,5 +14,6 @@ module.exports = {
         caughtErrorsIgnorePattern: '^_',
       },
     ],
+    '@typescript-eslint/no-empty-interface': 0,
   },
 }
