@@ -41,7 +41,7 @@ export function SignIn() {
           console.log(error)
           Alert.alert(
             'Entrar',
-            'Não foi possível conectar com sua conta Google.',
+            'Não foi possível conectar com sua conta Google. Error no servidor.',
           )
           setIsAuthenticating(false)
         })
