@@ -37,6 +37,11 @@ export function Home() {
   }
 
   useEffect(() => {
+    fetchVehicleInUse()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
     realm.addListener('change', () => {
       fetchVehicleInUse()
     })
