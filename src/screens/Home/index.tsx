@@ -36,6 +36,18 @@ export function Home() {
     }
   }
 
+  function fetchHistoric() {
+    const response = historic.filtered(
+      "status ='arrival' SORT(created_at DESC)",
+    )
+    console.log(response)
+  }
+
+  useEffect(() => {
+    fetchHistoric()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [historic])
+
   useEffect(() => {
     fetchVehicleInUse()
     // eslint-disable-next-line react-hooks/exhaustive-deps
