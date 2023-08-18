@@ -10,11 +10,17 @@ import { Alert } from 'react-native'
 export function Home() {
   const [vehicleInUse, setVehicleInUse] = useState<Historic | null>(null)
   const { navigate } = useNavigation()
-  function handleRegisterMovement() {
-    navigate('departure')
-  }
-
   const historic = useQuery(Historic)
+
+  function handleRegisterMovement() {
+    if (vehicleInUse?._id) {
+      return navigate('arrival', {
+        id: vehicleInUse?._id.toString(),
+      })
+    } else {
+      return navigate('departure')
+    }
+  }
 
   function fetchVehicle() {
     try {

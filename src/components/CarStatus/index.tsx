@@ -14,7 +14,7 @@ export function CarStatus({ licensePlate, ...rest }: Props) {
     : `Nenhum veículo em uso. `
   const status = licensePlate ? 'chegada' : 'saída'
 
-  const Icon = licensePlate ? Key : Car
+  const Icon = licensePlate ? Car : Key
 
   return (
     <Container {...rest}>
