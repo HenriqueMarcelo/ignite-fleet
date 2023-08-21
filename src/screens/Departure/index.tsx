@@ -4,21 +4,13 @@ import { Header } from '../../components/Header'
 import { LicensePlateInput } from '../../components/LicensePlateInput'
 import { TextAreaInput } from '../../components/TextAreaInput'
 import { Container, Content } from './styles'
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  TextInput,
-} from 'react-native'
+import { Alert, ScrollView, TextInput } from 'react-native'
 import { licensePlateValidate } from '../../utils/licensePlateValidate'
 import { useRealm } from '../../libs/realm'
 import { Historic } from '../../libs/realm/schemas/Historic'
 import { useUser } from '@realm/react'
 import { useNavigation } from '@react-navigation/native'
-
-const KeyboardAvoidViewBehavior =
-  Platform.OS === 'android' ? 'height' : 'position'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export function Departure() {
   const [description, setDescription] = useState('')
@@ -74,12 +66,25 @@ export function Departure() {
     <Container>
       <Header title="Saída" />
 
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={KeyboardAvoidViewBehavior}
-      >
+      <KeyboardAwareScrollView extraHeight={100}>
         <ScrollView>
           <Content>
+            <LicensePlateInput
+              ref={licensePlateRef}
+              label="Placa do veículo"
+              placeholder="BRA1234"
+              onSubmitEditing={() => descriptionRef.current?.focus()}
+              returnKeyType="next"
+              onChangeText={setLicensePlate}
+            />
+            <LicensePlateInput
+              ref={licensePlateRef}
+              label="Placa do veículo"
+              placeholder="BRA1234"
+              onSubmitEditing={() => descriptionRef.current?.focus()}
+              returnKeyType="next"
+              onChangeText={setLicensePlate}
+            />
             <LicensePlateInput
               ref={licensePlateRef}
               label="Placa do veículo"
@@ -105,7 +110,7 @@ export function Departure() {
             />
           </Content>
         </ScrollView>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     </Container>
   )
 }
