@@ -83,7 +83,11 @@ export function Home() {
       fetchVehicleInUse()
     })
 
-    return () => realm.removeListener('change', fetchVehicleInUse)
+    return () => {
+      if (realm && !realm.isClosed) {
+        realm.removeListener('change', fetchVehicleInUse)
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
