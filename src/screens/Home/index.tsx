@@ -70,6 +70,11 @@ export function Home() {
     navigate('arrival', { id })
   }
 
+  function progressNotification(transferred: number, transferable: number) {
+    const percentage = (transferred / transferable) * 100
+    console.log('Transferido =>', `${percentage}%`)
+  }
+
   useEffect(() => {
     fetchHistoric()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,6 +108,23 @@ export function Home() {
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realm])
+
+  useEffect(() => {
+    const syncSession = realm.syncSession
+
+    if (!syncSession) {
+      return undefined
+    }
+
+    syncSession.addProgressNotification(
+      Realm.ProgressDirection.Upload,
+      Realm.ProgressMode.ReportIndefinitely,
+      progressNotification,
+    )
+
+    return () => syncSession.removeProgressNotification(progressNotification)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Container>
