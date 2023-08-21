@@ -28,6 +28,8 @@ export function Arrival() {
   const realm = useRealm()
   const { goBack } = useNavigation()
 
+  const title = historic?.status === 'departure' ? 'Chegada' : 'Detalhes'
+
   function removeVehicleUsage() {
     realm.write(() => {
       realm.delete(historic)
@@ -67,7 +69,7 @@ export function Arrival() {
 
   return (
     <Container>
-      <Header title="Chegada" />
+      <Header title={title} />
       <Content>
         <Label>Placa do veículo</Label>
         <LicensePlate>{historic?.license_plate}</LicensePlate>
@@ -75,10 +77,12 @@ export function Arrival() {
         <Label>Finalidade</Label>
         <Description>{historic?.description}</Description>
 
-        <Footer>
-          <ButtonIcon icon={X} onPress={handleRemoveVehicleUsage} />
-          <Button title="Registrar chegada" onPress={handleArrivalRegister} />
-        </Footer>
+        {historic?.status === 'departure' && (
+          <Footer>
+            <ButtonIcon icon={X} onPress={handleRemoveVehicleUsage} />
+            <Button title="Registrar chegada" onPress={handleArrivalRegister} />
+          </Footer>
+        )}
       </Content>
     </Container>
   )
