@@ -17,6 +17,7 @@ import {
   LocationAccuracy,
   LocationSubscription,
 } from 'expo-location'
+import { getAdressLocation } from '../../utils/getAddressLocation'
 
 export function Departure() {
   const [description, setDescription] = useState('')
@@ -88,7 +89,9 @@ export function Departure() {
         timeInterval: 1000,
       },
       (location) => {
-        console.log(location)
+        getAdressLocation(location.coords).then((address) => {
+          console.log(address)
+        })
       },
     ).then((response) => (subscription = response))
 
