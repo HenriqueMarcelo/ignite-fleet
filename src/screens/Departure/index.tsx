@@ -18,11 +18,13 @@ import {
   LocationSubscription,
 } from 'expo-location'
 import { getAdressLocation } from '../../utils/getAddressLocation'
+import { Loading } from '../../components/Loading'
 
 export function Departure() {
   const [description, setDescription] = useState('')
   const [licensePlate, setLicensePlate] = useState('')
   const [isRegistering, setIsRegistering] = useState(false)
+  const [isLoadingLocation, setIsLoadingLocation] = useState(true)
 
   const [locationForegroundPermission, requestLocationForegroundPermission] =
     useForegroundPermissions()
@@ -89,13 +91,19 @@ export function Departure() {
         timeInterval: 1000,
       },
       (location) => {
-        getAdressLocation(location.coords).then((address) => {
-          console.log(address)
-        })
+        getAdressLocation(location.coords)
+          .then((address) => {
+            console.log(address)
+          })
+          .finally(() => setIsLoadingLocation(false))
       },
     ).then((response) => (subscription = response))
 
-    return () => subscription.remove()
+    return () => {
+      if (subscription) {
+        subscription.remove()
+      }
+    }
   }, [locationForegroundPermission?.granted])
 
   if (!locationForegroundPermission?.granted) {
@@ -109,6 +117,10 @@ export function Departure() {
         </Message>
       </Container>
     )
+  }
+
+  if (isLoadingLocation) {
+    return <Loading />
   }
 
   return (
