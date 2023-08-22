@@ -104,12 +104,10 @@ export function Home() {
 
   useEffect(() => {
     fetchHistoric()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [historic])
 
   useEffect(() => {
     fetchVehicleInUse()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -122,7 +120,6 @@ export function Home() {
         realm.removeListener('change', fetchVehicleInUse)
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -133,7 +130,6 @@ export function Home() {
 
       mutableSubs.add(historicByUserQuery, { name: 'historic_by_user' })
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realm])
 
   useEffect(() => {
@@ -150,7 +146,6 @@ export function Home() {
     )
 
     return () => syncSession.removeProgressNotification(progressNotification)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

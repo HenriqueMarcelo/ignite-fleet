@@ -77,7 +77,6 @@ export function Arrival() {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       setDataNotSynced(historic!.updated_at.getTime() > lastSync),
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
