@@ -148,6 +148,10 @@ export function Departure() {
                   latitude: -22.8766,
                   longitude: -43.2118,
                 },
+                {
+                  latitude: -22.8781,
+                  longitude: -43.2121,
+                },
               ]}
             />
           )}
