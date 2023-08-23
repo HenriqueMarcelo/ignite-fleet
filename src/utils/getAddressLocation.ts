@@ -1,6 +1,6 @@
 import { reverseGeocodeAsync, LocationObjectCoords } from 'expo-location'
 
-export async function getAdressLocation({
+export async function getAddressLocation({
   latitude,
   longitude,
 }: LocationObjectCoords) {
